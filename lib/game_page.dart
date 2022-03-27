@@ -19,6 +19,7 @@ class _GamePageState extends State<GamePage> {
   var _text = "";
   var _isCorrect = false;
   var _incorrect = 0;
+  var answer ;
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +48,15 @@ class _GamePageState extends State<GamePage> {
                             children: [
                               Image.network(data[_id]['image_url'], height: 350.0,),
                               for(var i=0;i<data[_id]['choice_list'].length;++i)
+                               // answer = data[_id]['answer'],
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: ElevatedButton(
-                                    onPressed: (){
+                                    onPressed: ( ){
                                       setState(() {
-
-                                        if(data[_id]['choice_list'][data[_id]['answer']] ){
+                                        print(i);
+                                        print(data[_id]['answer']);
+                                        if(data[_id]['choice_list'][i] == data[_id]['choice_list'][data[_id]['answer']]){
                                           _text = "เก่งมากค่ะ";
                                           _isCorrect = true;
                                           Timer(Duration(seconds: 1), () {
@@ -65,6 +68,7 @@ class _GamePageState extends State<GamePage> {
 
                                         }else{
                                           setState(() {
+
                                             _text = "ยังไม่ถูก ลองใหม่นะคะ";
                                             _isCorrect = false;
                                             _incorrect++;
